@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paddy Leaf Disease Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .region-box {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border: 1px solid #d5e2d5;
+            border-radius: 8px;
+            background: #f6faf6;
+        }
+        .region-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+        .region-select {
+            width: 100%;
+            padding: 0.55rem 0.65rem;
+            border: 1px solid #b7cbb7;
+            border-radius: 6px;
+            background: #ffffff;
+            font-size: 0.95rem;
+        }
+        .region-meta {
+            margin: 0.45rem 0 0;
+            font-size: 0.82rem;
+            color: #465a46;
+            line-height: 1.35;
+        }
+        .llama-badge {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.14);
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+        .license-footer {
+            max-width: 1100px;
+            margin: 1.5rem auto 2rem;
+            padding: 0.9rem 1.15rem;
+            border-top: 1px solid #d5e2d5;
+            font-size: 0.82rem;
+            color: #465a46;
+            text-align: center;
+            line-height: 1.5;
+        }
+        .license-footer strong {
+            color: #1f3a1f;
+        }
+        .license-footer p {
+            margin: 0.2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 id="header-title">Paddy Leaf Disease Detector</h1>
+        <p id="header-subtitle">Select your agro-climatic region, upload a rice leaf photo for instant ICAR/CIBRC remedies, and ask follow-up questions offline.</p>
+        <span class="llama-badge">Built with Llama &bull; Llama 3.2 1B Instruct</span>
+    </header>
+
+    <main class="container">
+        <section class="panel upload-panel">
+            <h2 id="panel1-heading">1. Region &amp; Leaf Inspection</h2>
+
+            <div class="region-box">
+                <label for="language-select" id="language-label" class="region-label">
+                    Language
+                </label>
+                <select id="language-select" class="region-select">
+                    {% for lang in languages %}
+                    <option
+                        value="{{ lang.code }}"
+                        data-english-name="{{ lang.english_name }}"
+                        data-native-name="{{ lang.native_name }}"
+                        {% if lang.code == default_language %}selected{% endif %}
+                    >
+                        {% if lang.code == 'en' %}{{ lang.english_name }}{% else %}{{ lang.english_name }} — {{ lang.native_name }}{% endif %}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="region-box">
+                <label for="region-select" id="region-label" class="region-label">
+                    Agro-Climatic Region
+                </label>
+                <select id="region-select" class="region-select">
+                    {% for r in regions %}
+                    <option
+                        value="{{ r.id }}"
+                        data-name-en="{{ r.name_en }}"
+                        data-name-hi="{{ r.name_hi }}"
+                        data-name-bn="{{ r.name_bn }}"
+                        data-states="{{ r.states_covered | join(', ') }}"
+                        data-seasons="{{ r.main_paddy_seasons | join(', ') }}"
+                        data-states-short="{{ r.states_covered[:3] | join(', ') }}{% if r.states_covered | length > 3 %}...{% endif %}"
+                    >
+                        {{ r.name_en }} — {{ r.states_covered[:3] | join(', ') }}{% if r.states_covered | length > 3 %}...{% endif %}
+                    </option>
+                    {% endfor %}
+                </select>
+                <p id="region-meta" class="region-meta"></p>
+            </div>
+
+            <form id="upload-form">
+                <label for="image-input" id="file-label" class="file-label">Choose a leaf image</label>
+                <input type="file" id="image-input" accept="image/*" required>
+                <button type="submit" id="predict-btn">Check Leaf</button>
+            </form>
+
+            <div id="preview-box" class="preview-box hidden">
+                <img id="preview-img" src="" alt="Uploaded paddy leaf preview">
+            </div>
+
+            <div id="result-box" class="result-box hidden">
+                <p class="result-status" id="result-status"></p>
+                <p class="result-detail" id="result-detail"></p>
+            </div>
+        </section>
+
+        <section class="panel chat-panel">
+            <h2 id="panel2-heading">2. Agriculture Assistant (Llama 3.2 1B)</h2>
+
+            <div id="chat-messages" class="chat-messages">
+                <div id="welcome-message" class="message bot" style="white-space: pre-wrap;">Select your region and upload a paddy leaf image on the left for instant verified remedies, or ask any rice farming question below in English.</div>
+            </div>
+
+            <form id="chat-form" class="chat-form">
+                <input
+                    type="text"
+                    id="chat-input"
+                    placeholder="Ask in English..."
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit" id="send-btn">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="license-footer" role="contentinfo">
+        <p><strong>Built with Llama</strong> &mdash; Offline chat powered by Meta Llama 3.2 1B Instruct (ExecuTorch).</p>
+        <p>Llama 3.2 is licensed under the Llama 3.2 Community License, Copyright &copy; Meta Platforms, Inc. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        window.APP_UI_TEXT = {{ ui_text | tojson }};
+        window.DEFAULT_LANGUAGE = {{ default_language | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
