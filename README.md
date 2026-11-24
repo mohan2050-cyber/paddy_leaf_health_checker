@@ -28,9 +28,11 @@ Make sure the files and folders are arranged in the following manner:
 
 
 Once the files have been downloaded and the packages have been installed, run the following:
-`cd ~/paddy_leaf_health_checker`
-`source paddy_app/bin/activate`
-`python app.py`
+```
+cd ~/paddy_leaf_health_checker
+source paddy_app/bin/activate
+python app.py
+```
 It will run the server.
 
 On a web browser, open the following link: `http://127.0.0.1:5000`
