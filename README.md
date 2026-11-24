@@ -41,8 +41,9 @@ On a web browser, open the following link: `http://127.0.0.1:5000`
 
 The Jupyter notebook included in this repository is provided **for reference only** to show the workflow used for model training and ExecuTorch (`.pte`) conversion. If you want to use it for training or conversion, you will need to modify the file paths, dataset locations, and configuration parameters accordingly.
 
-## License & Attribution
+## License & Third-Party Attributions
 
 **Built with Llama**
 
-This project uses Meta Llama 3.2 1B Instruct (`llama32_1b_et`). Llama 3.2 is licensed under the Llama 3.2 Community License, Copyright © Meta Platforms, Inc. All Rights Reserved.
+- **Meta Llama 3.2:** This project uses Meta Llama 3.2 1B Instruct (`llama32_1b_et`). Llama 3.2 is licensed under the Llama 3.2 Community License, Copyright © Meta Platforms, Inc. All Rights Reserved.
+- **External Libraries, Datasets & References:** All third-party libraries (`executorch`, `torch`, `optimum-executorch`, `transformers`, `argostranslate`, `flask`, `numpy`, `pillow`, etc.), datasets (including the Kaggle *Paddy Doctor: Paddy Disease Classification* dataset), pre-trained base weights, and cited research papers remain the intellectual property of their respective owners and authors, and are subject to their original licenses and terms of use. No ownership is claimed over any third-party materials, and the training dataset is not redistributed in this repository.
