@@ -27,6 +27,10 @@ Make sure the files and folders are arranged in the following manner:
 <img width="364" height="291" alt="image" src="https://github.com/user-attachments/assets/a5af8c43-f890-40d7-b2d8-38ee3c348b8f" />
 
 
-Once the files have been downloaded and the packages have been installed, run `run.sh` to run the server.
+Once the files have been downloaded and the packages have been installed, run the following:
+`cd ~/paddy_leaf_health_checker`
+`source paddy_app/bin/activate`
+`python app.py`
+It will run the server.
 
 On a web browser, open the following link: `http://127.0.0.1:5000`
