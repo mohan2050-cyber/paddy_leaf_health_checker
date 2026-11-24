@@ -40,3 +40,9 @@ On a web browser, open the following link: `http://127.0.0.1:5000`
 ## Training & Model Conversion Notebook
 
 The Jupyter notebook included in this repository is provided **for reference only** to show the workflow used for model training and ExecuTorch (`.pte`) conversion. If you want to use it for training or conversion, you will need to modify the file paths, dataset locations, and configuration parameters accordingly.
+
+## License & Attribution
+
+**Built with Llama**
+
+This project uses Meta Llama 3.2 1B Instruct (`llama32_1b_et`). Llama 3.2 is licensed under the Llama 3.2 Community License, Copyright © Meta Platforms, Inc. All Rights Reserved.
