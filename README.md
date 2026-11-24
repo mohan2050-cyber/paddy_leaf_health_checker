@@ -1,4 +1,4 @@
-# Paddy Leaf Health Checker (Tested and run on Raspberry Pi 5 using Raspberry Pi os 64-bit)
+# Paddy Leaf Health Checker (Tested and run on Raspberry Pi 5 using Raspberry Pi OS 64-bit)
 
 ## IMPORTANT - Notes for visitors
 
