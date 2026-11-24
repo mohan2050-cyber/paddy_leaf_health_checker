@@ -6,7 +6,7 @@ NOTE 1/3: AI assistance was used for coding, debugging, documentation and drafti
 
 NOTE 2/3: This repository was created for a hackathon submission.
 
-**NOTE 3/3: AI tools were used to rapidly build this feasibility prototype and prove the concept works, rather than to create a finished product. A clean, stable version written entirely by me will follow in a future release.**
+**NOTE 3/3: AI tools were used to rapidly build this feasibility prototype and prove the concept works, rather than to create a finished product. This project (including code, logic and documentation) may contain errors. A clean, stable version written entirely by me will follow in a future release.**
 
 ## External Libraries
 
