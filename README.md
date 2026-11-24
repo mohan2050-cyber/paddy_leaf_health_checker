@@ -1,4 +1,4 @@
-# Paddy Leaf Health Checker
+# Paddy Leaf Health Checker (Tested and run on Raspberry Pi 5 using Raspberry Pi os 64-bit)
 
 ## IMPORTANT - Notes for visitors
 
@@ -19,6 +19,13 @@ NOTE 2/3: This repository was created for a hackathon submission.
 * `numpy`
 * `pillow`
 
-Arrange the files in the following manner:
+## Setup
+Run the `install.sh` script on your Raspberry Pi 5 to download the required files and install the required packages.
+
+Make sure the files and folders are arranged in the following manner:
 
 <img width="366" height="343" alt="image" src="https://github.com/user-attachments/assets/7cc91c78-24df-467c-ac27-118bfe3cc3fa" />
+
+Once the files have been downloaded and the packages have been installed, run `run.sh` to run the server.
+
+On a web browser, open the following link: `http://127.0.0.1:5000`
