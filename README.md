@@ -1,4 +1,6 @@
-# paddy_leaf_health_checker
+# Paddy Leaf Health Checker
+
+**IMPORTANT - Notes for the visitors**
 
 NOTE 1/3: AI assistance was used for coding, debugging, documentation and drafting the initial proof-of-concept knowledge base for this project.
 
