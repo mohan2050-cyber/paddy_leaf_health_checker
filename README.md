@@ -24,7 +24,8 @@ Run the `install.sh` script on your Raspberry Pi 5 to download the required file
 
 Make sure the files and folders are arranged in the following manner:
 
-<img width="366" height="343" alt="image" src="https://github.com/user-attachments/assets/7cc91c78-24df-467c-ac27-118bfe3cc3fa" />
+<img width="364" height="291" alt="image" src="https://github.com/user-attachments/assets/a5af8c43-f890-40d7-b2d8-38ee3c348b8f" />
+
 
 Once the files have been downloaded and the packages have been installed, run `run.sh` to run the server.
 
