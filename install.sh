@@ -17,22 +17,22 @@ cd "${APP_DIR}"
 echo "==> Downloading application files from GitHub (main)..."
 for file in app.py class_names.json knowledge_base.py paddy_regional_advisories_india.json translator.py; do
     echo "    -> ${file}"
-    curl -fL "${RAW_BASE}/${file}" -o "${file}"
+    curl -4 -fL "${RAW_BASE}/${file}" -o "${file}"
 done
 
 echo "==> Downloading static assets..."
-curl -fL "${RAW_BASE}/static/app.js" -o "static/app.js"
-curl -fL "${RAW_BASE}/static/style.css" -o "static/style.css"
+curl -4 -fL "${RAW_BASE}/app.js" -o "static/app.js"
+curl -4 -fL "${RAW_BASE}/style.css" -o "static/style.css"
 
 echo "==> Downloading HTML template..."
-curl -fL "${RAW_BASE}/templates/index.html" -o "templates/index.html"
+curl -4 -fL "${RAW_BASE}/index.html" -o "templates/index.html"
 
 echo "==> Downloading model files from Release v0.1.0..."
 echo "    -> efficientnet_b4_paddy.pte"
-curl -fL --progress-bar "${RELEASE_BASE}/efficientnet_b4_paddy.pte" -o "efficientnet_b4_paddy.pte"
+curl -4 -fL --progress-bar "${RELEASE_BASE}/efficientnet_b4_paddy.pte" -o "efficientnet_b4_paddy.pte"
 
 echo "    -> llama32_1b_et.zip"
-curl -fL --progress-bar "${RELEASE_BASE}/llama32_1b_et.zip" -o "llama32_1b_et.zip"
+curl -4 -fL --progress-bar "${RELEASE_BASE}/llama32_1b_et.zip" -o "llama32_1b_et.zip"
 
 echo "==> Extracting llama32_1b_et.zip..."
 rm -rf llama32_1b_et llama32_1b_et_tmp
