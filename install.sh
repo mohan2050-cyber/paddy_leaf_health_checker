@@ -62,7 +62,7 @@ pip install \
     executorch \
     transformers \
     optimum-executorch \
-    argostranslate
+    "argostranslate==1.10.0"
 
 echo "==> Installing Argos Translate language models..."
 argospm update
@@ -77,6 +77,7 @@ import socket
 import urllib3.util.connection as urllib3_cn
 import argostranslate.translate
 
+# Force IPv4 during initial cache setup to avoid IPv6 stalls on Raspberry Pi networks
 urllib3_cn.allowed_gai_family = lambda: socket.AF_INET
 _orig_getaddrinfo = socket.getaddrinfo
 def _ipv4_getaddrinfo(host, port, family=0, type=0, proto=0, flags=0):
