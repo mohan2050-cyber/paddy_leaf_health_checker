@@ -73,7 +73,15 @@ argospm install translate-hi_en
 
 echo "==> Warming up Argos Translate models for offline use..."
 python - << 'EOF'
+import socket
+import urllib3.util.connection as urllib3_cn
 import argostranslate.translate
+
+urllib3_cn.allowed_gai_family = lambda: socket.AF_INET
+_orig_getaddrinfo = socket.getaddrinfo
+def _ipv4_getaddrinfo(host, port, family=0, type=0, proto=0, flags=0):
+    return _orig_getaddrinfo(host, port, socket.AF_INET, type, proto, flags)
+socket.getaddrinfo = _ipv4_getaddrinfo
 
 test_pairs = [
     ("en", "bn", "Hello"),
