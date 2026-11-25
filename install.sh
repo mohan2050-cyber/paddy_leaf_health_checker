@@ -71,6 +71,23 @@ argospm install translate-bn_en
 argospm install translate-en_hi
 argospm install translate-hi_en
 
+echo "==> Warming up Argos Translate models for offline use..."
+python - << 'EOF'
+import argostranslate.translate
+
+test_pairs = [
+    ("en", "bn", "Hello"),
+    ("bn", "en", "হ্যালো"),
+    ("en", "hi", "Hello"),
+    ("hi", "en", "नमस्ते"),
+]
+
+for from_code, to_code, sample in test_pairs:
+    translated = argostranslate.translate.translate(sample, from_code, to_code)
+    assert translated and translated.strip(), f"Translation failed for {from_code} -> {to_code}"
+    print(f"    -> Verified {from_code} -> {to_code}: {translated.strip()}")
+EOF
+
 echo ""
 echo "==> Setup complete!"
 echo "Run the app with:"
